@@ -1,1 +1,26 @@
 ---
+
+- import_tasks: dependencies.yml
+
+- import_tasks: luser.yml
+
+- name: get current glassfish version
+  command: /usr/local/bin/glassfish-asadmin version
+  register: glassfish_current_version
+  ignore_errors: yes
+
+- import_tasks: install.yml
+  when: glassfish_current_version | failed or not glassfish_current_version.stdout | search(glassfish_version_string_match)
+
+- import_tasks: setup.yml
+
+- name: check if systemd is installed
+  command: systemctl --version
+  register: systemctl_version
+  ignore_errors: yes
+
+- import_tasks: service-initv.yml
+  when: systemctl_version.rc != 0
+
+- import_tasks: service-systemd.yml
+  when: systemctl_version.rc == 0

@@ -1,3 +1,7 @@
 ---
 
 glassfish_download_url: http://download.oracle.com/glassfish/{{ glassfish_version }}/release/glassfish-{{ glassfish_version }}.zip
+
+glassfish_major_version: "{{ glassfish_version.split('.')[0] }}"
+
+glassfish_version_string_match: "Version = GlassFish Server Open Source Edition {{ glassfish_version }}"

@@ -8,10 +8,24 @@ An Ansible role that installs glassfish on Debian-like systems.
 
 none
 
+## Usage
+
+### Update master-password
+
+(default master-password: `changeit`)
+
+```bash
+$ sudo -u glassfish glassfish-asadmin change-master-password domain1
+```
+
 ## Role Variables
 
 ```yaml
 glassfish_version: 3.1.2.2
+
+glassfish_home: /home/glassfish
+
+glassfish_domain_libs: []
 ```
 
 ## Dependencies

@@ -1,0 +1,11 @@
+---
+
+- name: add systemd service
+  template:
+    src: glassfish.service.ini
+    dest: /lib/systemd/system/glassfish.service
+    mode: 0644
+  become: yes
+  notify:
+    - reload_systemd
+    - restart_glassfish

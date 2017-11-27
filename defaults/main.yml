@@ -1,3 +1,7 @@
 ---
 
 glassfish_version: 3.1.2.2
+
+glassfish_home: /home/glassfish
+
+glassfish_domain_libs: []

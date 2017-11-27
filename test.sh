@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__DIR__="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__DIR__="$(dirname "$("${READLINK_PATH:-readlink}" -f "$0")")"
 
 # required libs
 source "${__DIR__}/.bash/functions.shlib"
@@ -93,6 +93,10 @@ while [[ "${i}" -lt "60" ]]; do
 done
 
 if [[ -z "${success}" ]]; then
-  consolelog "wildfly unreachable" "error"
+  consolelog "glassfish unreachable" "error"
   exit 1
+fi
+
+if [[ "${CONNECTION}" == "local" ]]; then
+  glassfish-asadmin version
 fi
