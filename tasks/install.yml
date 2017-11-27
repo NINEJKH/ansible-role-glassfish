@@ -1,0 +1,10 @@
+---
+
+- name: download glassfish
+  unarchive:
+    src: "{{ glassfish_download_url }}"
+    dest: "{{ glassfish_home }}/"
+    remote_src: yes
+  become_user: glassfish
+  become: yes
+  notify: restart_glassfish

@@ -2,5 +2,12 @@
 
 - hosts: all
 
+  vars:
+    oracle_java_version: 7u80
+
+    glassfish_domain_libs:
+      - http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.17/mysql-connector-java-5.1.17.jar
+      - http://central.maven.org/maven2/antlr/antlr/2.7.6/antlr-2.7.6.jar
+
   roles:
     - { role: "{{ role_root | default('../ansible-role-glassfish') }}" }
