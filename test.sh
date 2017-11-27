@@ -59,7 +59,10 @@ role_root="$(pwd)"
 consolelog "installing requirements"
 ansible-galaxy install lifeofguenter.oracle-java
 
-echo "${JAVA_HOME}"
+# fix travis
+if [[ ! -z "${TRAVIS}" ]]; then
+  export JAVA_HOME=/usr/lib/jvm/jdk-7-oracle-x64
+fi
 
 consolelog "running role as playbook #1"
 ansible-playbook \
