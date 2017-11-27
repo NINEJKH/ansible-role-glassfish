@@ -5,7 +5,14 @@
     path: "{{ glassfish_home }}/glassfish{{ glassfish_major_version }}/bin/asadmin"
     regexp: ^AS_INSTALL=.*$
     replace: AS_INSTALL="$(dirname "$("${READLINK_PATH:-readlink}" -f "$0")")/../glassfish"
-    backup: yes
+  become_user: glassfish
+  become: yes
+
+- name: fix asenv.conf
+  lineinfile:
+    path: "{{ glassfish_home }}/glassfish{{ glassfish_major_version }}/glassfish/config/asenv.conf"
+    regexp: ^AS_JAVA=.*$
+    line: AS_JAVA="$(dirname "$(dirname "$(readlink -f /etc/alternatives/java)")")"
   become_user: glassfish
   become: yes
 
