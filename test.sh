@@ -59,6 +59,8 @@ role_root="$(pwd)"
 consolelog "installing requirements"
 ansible-galaxy install lifeofguenter.oracle-java
 
+echo "${JAVA_HOME}"
+
 consolelog "running role as playbook #1"
 ansible-playbook \
   --inventory="${TARGET_HOST}," \
