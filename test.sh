@@ -57,7 +57,11 @@ fi
 role_root="$(pwd)"
 
 consolelog "installing requirements"
-ansible-galaxy install lifeofguenter.oracle-java
+
+# does not work with travis/precise
+if [[ -z "${TRAVIS}" ]]; then
+  ansible-galaxy install lifeofguenter.oracle-java
+fi
 
 consolelog "running role as playbook #1"
 ansible-playbook \
