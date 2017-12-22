@@ -18,8 +18,8 @@ addons:
     - python-setuptools
 
 install:
-  - sudo -H easy_install pip
-  - sudo -H pip install -U setuptools
+  - sudo -H easy_install --upgrade setuptools pip
+  #- sudo -H pip install -U setuptools
   # http://urllib3.readthedocs.io/en/latest/user-guide.html#ssl-py2
   - sudo -H pip install -U pyOpenSSL cryptography idna certifi
   - sudo -H pip install -U urllib3
