@@ -57,7 +57,32 @@ fi
 role_root="$(pwd)"
 
 consolelog "installing requirements"
-ansible-galaxy install lifeofguenter.oracle-java
+
+# does not work with travis/precise
+if [[ -z "${TRAVIS}" ]]; then
+  ansible-galaxy install lifeofguenter.oracle-java
+else
+  cat <<'EOF' > meta/main.yml
+  galaxy_info:
+    author: Gunter Grodotzki
+    description: Installs GlassFish on Debian-like systems.
+    company: 9JKH (Pty) Ltd.
+    license: MIT
+    min_ansible_version: 2.4
+    platforms:
+      - name: Ubuntu
+        versions:
+          - xenial
+          - trusty
+      - name: Debian
+        versions:
+          - stretch
+          - jessie
+    galaxy_tags:
+      - system
+      - development
+EOF
+fi
 
 consolelog "running role as playbook #1"
 ansible-playbook \
